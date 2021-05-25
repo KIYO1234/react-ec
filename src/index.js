@@ -4,15 +4,39 @@ import './index.css';
 import App from '../src/components/App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
-import store from './store/index'
-// 非同期処理をするためthunkをimport
-// import thunk from 'redux-thunk'
+// 元々はstore/indexを作ってた
+// import store from './store/index'
 // firebase
 import firebase from 'firebase'
 
+//rakutenApi.js用
+import MapState from './components/MapState'
+// 非同期処理をするためthunkをimport
+import thunk from 'redux-thunk'
+import {createStore, applyMiddleware} from 'redux'
+// reducers/index.js 内で export default combineReducersとしていたものをここではreducerという名前でimport
+import reducer from './reducers/index'
+import {
+  BrowserRouter as Router,
+  Switch,Route, 
+} from 'react-router-dom'
+import {Details} from './components/Details'
+import Individual from './components/Individual'
+
+
+const store = createStore(reducer, applyMiddleware(thunk))
+
 ReactDOM.render(
   <Provider store = {store}>
-    <App />
+  <Router>
+    {/* <App /> */}
+    <Switch>
+        <Route path='/details'><Details /></Route>
+        {/* 受け取る側では:itemId?で動的ルーティング&オプション化 */}
+        <Route path='/individual/:itemId?'><Individual /></Route>
+        <Route path='/'><MapState /></Route>
+    </Switch>
+  </Router>
   </Provider>,
   document.getElementById('root')
 );

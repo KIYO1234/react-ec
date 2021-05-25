@@ -3,7 +3,6 @@
 import {applyMiddleware, createStore} from 'redux'
 // 非同期処理をするためthunkをimport
 import thunk from 'redux-thunk'
-import firebase from 'firebase'
 
 
 // ここがstoreのstateになる
@@ -11,7 +10,6 @@ import firebase from 'firebase'
 // const ~~ = useSelector(state => state.~~（今回だとitems）)のstateになる
 const initialState = {
     items: [],
-    itemId: 1,
     loginUser: ''
 }
 
@@ -20,26 +18,20 @@ const ItemsReducer = (state = initialState, action) => {
     switch(action.type) {
 
         case 'SENDITEM':
-            // console.log(state)
-            // console.log(action)
-            // console.log(state.items)
+            console.log(action.items);
             return {
                 items: action.items
-            }
-        case 'LOGIN':
-            // firebase.auth().onAuthStateChanged(user => 
-            //     console.log(user.id)
-            // )
-            // console.log(state)
-            // console.log(action)
-            return {
-                loginUser: state
             }
         case 'SETUSER':
             console.log(state)
             console.log(action)
             return {
                 loginUser: action.loginUser
+            }
+        case 'DELETELOGINUSER':
+            console.log('deleted')
+            return {
+                loginUser: null
             }
         default:
             return state
