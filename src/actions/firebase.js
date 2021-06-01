@@ -45,3 +45,23 @@ export const addToCart = (newItem, uid) => dispatch => {
         })
     })
 }
+
+
+// sample
+export const SETITEMTOSAMPLE = 'setItemToSample'
+export const setItemToSample = (newItem) => ({
+    type: SETITEMTOSAMPLE, 
+    newItem: newItem
+})
+export const ADDTOSAMPLE = 'addToSample'
+export const addToSample = (newItem) => dispatch => {
+    console.log(newItem);
+    console.log('added to sample');
+    firebase.firestore().collection(`samples`).add(newItem).then(() => {
+        console.log('done to sample');
+        dispatch({
+            type: SETITEMTOSAMPLE,
+            newItem: newItem,
+        })
+    })
+}

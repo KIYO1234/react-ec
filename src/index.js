@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -22,6 +23,9 @@ import {
 } from 'react-router-dom'
 import {Details} from './components/Details'
 import Individual from './components/Individual'
+import {SignIn} from './MaterialUI.js/SignIn'
+import {AddressForm} from './MaterialUI.js/AddressForm'
+import {BasicTable} from './MaterialUI.js/BasicTable'
 
 
 const store = createStore(reducer, applyMiddleware(thunk))
@@ -30,9 +34,12 @@ ReactDOM.render(
   <Provider store = {store}>
   <Router>
     {/* <App /> */}
+    {/* <SignIn /> */}
+    {/* <AddressForm /> */}
+    {/* <BasicTable /> */}
+    {/* 受け取る側では:itemId?で動的ルーティング&オプション化 */}
     <Switch>
         <Route path='/details'><Details /></Route>
-        {/* 受け取る側では:itemId?で動的ルーティング&オプション化 */}
         <Route path='/individual/:itemId?'><Individual /></Route>
         <Route path='/'><MapState /></Route>
     </Switch>

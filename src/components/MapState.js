@@ -8,24 +8,84 @@ import {login, logout, asyncSetUser} from '../actions/firebase'
 import {asyncSearchItem} from '../actions/rakuten'
 // import {deleteUser} from '../actions/index'
 import {setItem} from '../actions/firebase'
+import {addToSample} from '../actions/firebase'
 import { useEffect } from 'react';
 import {Link} from 'react-router-dom'
+//Material UI
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import firebase from 'firebase'
+
 
 
 const MapState = props => {
-    console.log(props);
-    // console.log(props.loginUser)
-    
-    // ログイン
-    useEffect(() => {
+  // console.log(props);
+  // console.log(window.Email)
+
+  const email = window.Email
+  console.log(email)
+  const sendEmail = () => {
+    email.send({
+      Host : "smtp.elasticemail.com",
+      Username : "getstarted3601@gmail.com",
+      Password : "FF64CD6628A5154D408D64CF0FD27880A64B",
+      To : 'kyosuke.aizawa@rakus-partners.co.jp',
+      From : "getstarted3601@gmail.com",
+      Subject : "This is the subject",
+      Body : "きてるかーい"
+    }).then(
+      message => alert(message)
+    );
+  }
+
+  // Email.send({
+  //     Host : "smtp.elasticemail.com",
+  //     Username : "getstarted3601@gmail.com",
+  //     Password : "FF64CD6628A5154D408D64CF0FD27880A64B",
+  //     To : 'kyosuke.aizawa@rakus-partners.co.jp',
+  //     From : "getstarted3601@gmail.com",
+  //     Subject : "This is the subject",
+  //     Body : "react app から送信"
+  //   }).then(
+  //     message => alert(message)
+  //   );
+
+
+  // console.log(this.Email)
+  // alert('こんにちは')
+  // console.log(props.loginUser)
+  
+  // ログイン＆firestore.get
+  useEffect(() => {
+      // firebase.firestore().collection('samples').get().then(snapshot => snapshot.forEach(doc => console.log(doc.data())))
+
+      // firebase.firestore().collection('samples').doc('sample2').set({title: 'aaa'});
+
+      // firebase.firestore().collection('samples').doc('ZVBF0akn2UoTagi00rKQ').set({title: 'aaa'});
         // console.log(props)
         props.asyncSetUser()
     })
 
+
+    // const sendEmail = () => {
+    //   Email.send({
+    //     Host : "smtp.elasticemail.com",
+    //     Username : "getstarted3601@gmail.com",
+    //     Password : "FF64CD6628A5154D408D64CF0FD27880A64B",
+    //     To : 'kyosuke.aizawa@rakus-partners.co.jp',
+    //     From : "getstarted3601@gmail.com",
+    //     Subject : "This is the subject",
+    //     Body : "And this is the body"
+    //   }).then(
+    //     message => alert(message)
+    //   );
+    // }
+
   return (
     <div className="App">
         <h1>ECサイト</h1>
-        <button><Link to='/details'>商品詳細画面へ</Link></button>
+        <button onClick={() => sendEmail()}>メールを送信</button>
+        <Button variant='contained'><Link to='/details'>商品詳細画面へ</Link></Button>
       
       {/* {props.loginUser && */}
         <React.Fragment>

@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 // import {addToCart} from '../actions/index'
 import {asyncSearchItem} from '../actions/rakuten'
 import {addToCart, asyncSetUser} from '../actions/firebase'
+import {addToSample} from '../actions/firebase'
 
 
 
@@ -34,6 +35,9 @@ export const Individual = props => {
                 <div>※ログインしていません</div>
             }
 
+            {/* sample */}
+            <button onClick={() => props.addToSample(newItem)}>サンプルに追加</button>
+
         </React.Fragment>
     )
 }
@@ -47,6 +51,7 @@ export const mapDispatchToProps = dispatch => ({
       asyncSearchItem: e =>dispatch(asyncSearchItem(e)),
       asyncSetUser: user => dispatch(asyncSetUser(user)),
       addToCart: (newItem, uid) => dispatch(addToCart(newItem, uid)),
+      addToSample: (newItem) => dispatch(addToSample(newItem)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Individual);
 // こいつは{}なしでimportする
